@@ -36,6 +36,7 @@ int main()
 	intro();
 
 	//Prompt user to - startgame, see credits or exit
+	cout << endl;
 	cout << "Welcome to One Day! Type the following number to:" << endl;
 	cout << "1. Start Game." << endl << "2. Credits. " << endl << "3. Exit." << endl;
 	cin >> choice;
@@ -97,7 +98,7 @@ void readFile(string fileName, string foo[], int size)
 
 void printChoicesFromArray(string choices[], int i, bool swapChoices)
 {
-	//Print choices from array 
+	//Print choices from array
 	if (!swapChoices)
 	{
 		cout << choices[i] << endl;
@@ -128,7 +129,7 @@ void startGame(int choice, int size, string choices[], string narrative[])
 		bernoulli_distribution coin_flip(0.5);
 		bool swapChoices = coin_flip(gen);
 
-		//Print choices from array 
+		//Print choices from array
 		printChoicesFromArray(choices, i, swapChoices);
 
 		cin >> choice;
@@ -164,7 +165,7 @@ void startGame(int choice, int size, string choices[], string narrative[])
 
 void intro()
 {
-	cout << "You start to hear a faint sound among the darkness. \nThe sound does not go away and starts to grow louder. Unable to ignore it for another minute, you find yourself becoming more aware. \nThe same goes for your senses. You realize that the sound is coming from the alarm clock. \nIt is Friday and you have college classes at AU University. You go on with your daily morning routine where you get ready and you eat breakfast. Once done you begin to decide how you want to go about your day, after all, you are an adult.";
+	cout << "You start to hear a faint sound among the darkness. \nThe sound does not go away and starts to grow louder. Unable to ignore it for another minute, you find yourself becoming more aware. \nThe same goes for your senses. You realize that the sound is coming from the alarm clock. \nIt is Friday and you have college classes at AU University. You go on with your daily morning routine where you get ready and you eat breakfast. \nOnce done you begin to decide how you want to go about your day, after all, you are an adult.";
 }
 
 void credits()
