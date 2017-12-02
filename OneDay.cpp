@@ -1,3 +1,4 @@
+
 // OneDay.cpp : Defines the entry point for the console application.
 //
 
@@ -5,7 +6,6 @@
 #include <fstream>
 #include <string>
 #include <random>
-
 
 using namespace std;
 
@@ -51,7 +51,6 @@ int main()
 	case 2:
 	{
 		credits();
-		break;
 	}
 	case 3:
 	{
