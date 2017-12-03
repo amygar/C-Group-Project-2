@@ -44,7 +44,7 @@ int main()
 	bool exitOption = false;
 	while (!exitOption)
 	{
-		cout << endl << "1. Play Game." << endl << "2. Credits. " << endl << "3. Exit(available during the game too)." << endl;
+		cout << endl << "1. Play Game." << endl << "2. Credits. " << endl << "3. Exit (available during the game too)." << endl;
 		cin >> mainOption;
 
 		switch (mainOption)
