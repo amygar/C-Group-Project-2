@@ -51,6 +51,7 @@ int main()
 	case 2:
 	{
 		credits();
+		
 	}
 	case 3:
 	{
