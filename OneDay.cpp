@@ -143,7 +143,7 @@ void startGame(int choice, int size, string choices[], string narrative[])
 	cout << "Go to school and attend classes.";
 
 	//Display narrative 1
-	cout << "You decide to go to school after all. Might as well act like an adult. \nAs you go from class to class the day seems to get shorter. It is 2:00 pm and you have one final class. \nAs you make your way to your last class you see a small group in the distance. The group turns out to be four boys. Three are kicking the life out of one of them. \nWhat do you do? " << endl;
+	cout << " You decide to go to school after all. Might as well act like an adult. \nAs you go from class to class, the day seems to get shorter. It is 2:00 P.M. and you have one final class. \nAs you make your way to your last class, you see a small group in the distance. The group turns out to be four boys. Three boys are kicking the life out of one of them. \nWhat do you do? " << endl;
 
 	//Loop through all the story/decisions
 	for (int i = 0; i < size; i += 2)
@@ -213,7 +213,7 @@ void startGame(int choice, int size, string choices[], string narrative[])
 
 void intro()
 {
-	cout << "You start to hear a faint sound among the darkness. \nThe sound does not go away and starts to grow louder. Unable to ignore it for another minute, you find yourself becoming more aware. \nThe same goes for your senses. You realize that the sound is coming from the alarm clock. \nIt is Friday and you have college classes at AU University. You go on with your daily morning routine where you get ready and you eat breakfast. \nOnce done you begin to decide how you want to go about your day, after all, you are an adult.";
+	cout << "You start to hear a faint sound among the darkness. \nThe sound does not go away and starts to grow louder. Unable to ignore it for another minute, you find yourself becoming more aware. \nThe same goes for your senses. You realize that the sound is coming from the alarm clock. \nIt is Friday and you have college classes at AU University. You go on with your daily morning routine, which you get ready and eat breakfast. \nOnce you are done, you begin to decide how you want your day to be. After all, you are an adult.";
 }
 
 void credits()
