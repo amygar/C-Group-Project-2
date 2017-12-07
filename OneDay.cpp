@@ -2,7 +2,7 @@
 //
 
 //This directive may not work when downloading. Test it to see if it work.
-#include "stdafx.h" 
+//#include "stdafx.h"
 
 #include <iostream>
 #include <fstream>
@@ -10,12 +10,12 @@
 #include <random>
 
 
-using namespace std;	
+using namespace std;
 
 //function prototype
 void readFile(string, string[], const int);
 void intro();
-void startGame(int, const int, string[], string[]);
+void startGame(int, const int, string[], string[], playerChoices, bestEnding);
 void credits();
 void finish();
 
@@ -35,6 +35,9 @@ int main()
 	fileName = "choices.txt";	//name of file with choices
 	readFile(fileName, choices, size);
 
+    int playerChoices[3];
+    int bestEnding[3] = {2, 4, 6};
+
 	//display intro
 	intro();
 
@@ -52,7 +55,7 @@ int main()
 		{
 		case 1:
 		{
-			startGame(mainOption, size, choices, narrative);
+			startGame(mainOption, size, choices, narrative, playerChoices, bestEnding);
 			break;
 		}
 		case 2:
@@ -105,6 +108,7 @@ void readFile(string fileName, string foo[], int size)
 	myfile.close();
 }
 
+
 void printChoicesFromArray(string choices[], int i, bool swapChoices)
 {
 	//Print choices from array
@@ -138,8 +142,22 @@ bool isExitChoice(int choice)
 	return result;
 }
 
-void startGame(int choice, int size, string choices[], string narrative[])
+//Test if input is valid
+int inputValid(int choice)
 {
+    while (!choice)
+    {
+        cin.clear();
+        cin.ignore(80, '\n');
+        cout << "Please, enter an integer" << endl;
+        cin >> choice;
+    }
+    return choice;
+}
+
+void startGame(int choice, int size, string choices[], string narrative[], playerChoices, bestEnding)
+{
+    /*
 	//Display scenario
 	cout << endl << "Go to school and attend classes." << endl;
 
@@ -157,6 +175,10 @@ void startGame(int choice, int size, string choices[], string narrative[])
 		//Print choices from array
 		printChoicesFromArray(choices, i, swapChoices);
 		cin >> choice;
+
+		//Test if input is valid
+		choice = inputValid(choice);
+
 		cout << endl;
 
 		//Test if player wants to exit the game (choice is 3)
@@ -182,6 +204,9 @@ void startGame(int choice, int size, string choices[], string narrative[])
 			//Opportunity to choose 1 or 2 again
 			printChoicesFromArray(choices, i, swapChoices);
 			cin >> choice;
+
+			//Test if input is valid
+			choice = inputValid(choice);
 			cout << endl;
 
 			//Test again if player wants to exit the game
@@ -191,7 +216,7 @@ void startGame(int choice, int size, string choices[], string narrative[])
 				break;	//Exit game
 			}
 
-			//Test if it's a bad choice 
+			//Test if it's a bad choice
 			badChoice = ((choice == 1 && !swapChoices) || (choice == 2 && swapChoices));
 		}
 
@@ -209,11 +234,95 @@ void startGame(int choice, int size, string choices[], string narrative[])
 			cout << narrative[i + 1] << endl;
 		}
 	}
+	*/
+    //Display choice 1 and 2
+
+        //Print choices from array
+		cout << printChoicesFromArray(choices, 0, swapChoices); //ignore choice 1
+        cout << printChoicesFromArray(choices, 1, swapChoices); //intervene
+		cin >> choice;
+
+		//Test if input is valid
+		choice = inputValid(choice);
+		cout << endl;
+        playerChoices[0] = choice; //store player choice in array
+
+        switch (choice)
+        {
+        case 1:
+            cout << endl << narrative[0] << endl;
+            break;
+        case 2:
+            cout << endl << narrative[1] << endl;
+            break;
+        }
+
+        //MAIN NARRATIVE
+        cout << printChoicesFromArray(choices, 2, swapChoices); //ignore
+        cout << printChoicesFromArray(choices, 3, swapChoices); //follow
+        cin >> choice;
+
+		//Test if input is valid
+		choice = inputValid(choice);
+		cout << endl;
+        playerChoices[1] = choice; //store player choice in array
+
+
+        while (choice == 1) //player decided to ignore
+        {
+            cout << endl << narrative[2] << endl;
+
+            cout << printChoicesFromArray(choices, 2, swapChoices); //ignore
+            cout << printChoicesFromArray(choices, 3, swapChoices); //follow
+            cin >> choice;
+
+            //Test if input is valid
+            choice = inputValid(choice);
+            cout << endl;
+            playerChoices[1] = choice; //store player choice in array
+        }
+
+        cout << endl << narrative[3] << endl;   //decided to follow
+
+        //Print choices from array
+		cout << printChoicesFromArray(choices, 4, swapChoices); //inform
+        cout << printChoicesFromArray(choices, 5, swapChoices); //convince
+		cin >> choice;
+
+		//Test if input is valid
+		choice = inputValid(choice);
+		cout << endl;
+        playerChoices[2] = choice; //store player choice in array
+
+        if (playerChoices[0] == 1)  //player decided to ignore in first decision
+        {
+            cout << endl << narrative[6] << endl;   //dies
+            //give the player the opportunity to inform and convince
+            //Print choices from array
+            cout << printChoicesFromArray(choices, 4, swapChoices); //inform
+            cout << printChoicesFromArray(choices, 5, swapChoices); //convince
+            cin >> choice;
+
+            //Test if input is valid
+            choice = inputValid(choice);
+            cout << endl;
+            playerChoices[2] = choice; //store player choice in array
+
+            while (choice == 2) //convince
+            {
+                //show loop 2 narrative
+            }
+            //if player decides to inform the police
+            //show narrative for choice 5
+        }
+
+    }
+
 }
 
 void intro()
 {
-	cout << "You start to hear a faint sound among the darkness. \nThe sound does not go away and starts to grow louder. Unable to ignore it for another minute, you find yourself becoming more aware. \nThe same goes for your senses. You realize that the sound is coming from the alarm clock. \nIt is Friday and you have college classes at AU University. You go on with your daily morning routine, which you get ready and eat breakfast. \nOnce you are done, you begin to decide how you want your day to be. After all, you are an adult.";
+    cout << "the intro";
 }
 
 void credits()
@@ -222,7 +331,7 @@ void credits()
 	cout << "	   One Day" << endl << endl;
 	cout << "	  Amy Garcia" << endl;
 	cout << "	  Rene Garcia" << endl;
-	cout << "	  Will Morgan" << endl;
+	cout << "	 William Morgan" << endl;
 	cout << "	 Brandon Perez" << endl;
 	cout << "	Franklyn Medina" << endl;
 	cout << endl;
